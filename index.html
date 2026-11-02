@@ -72,7 +72,7 @@ function render(data){
  rect(56,271,1488,313,'white',18);text(82,309,'POSITIONNEMENT DES CGRP',17,C.navy,700);
  const valid=values.filter(Number.isFinite);const min=Math.min(1800,Math.floor(Math.min(...valid)/100)*100-100),max=Math.max(2900,Math.ceil(Math.max(...valid)/100)*100+100);const pos=v=>144+(v-min)/(max-min)*1308;
  line(144,438,1452,438,'#dce4f1',15);for(let i=0;i<5;i++){const v=min+(max-min)*i/4;line(pos(v),455,pos(v),468);text(pos(v),487,money(v,0,'EUR'),11,C.muted,400,'text-anchor="middle"');}
- const marks=[{v:values[0],label:'Objectif N-1',color:'#a040ff',pointColor:'#3B82F6',lineColor:'#3B82F6',top:true},{v:values[2],label:'Max vendu N-1',color:C.orange,top:true},{v:values[1],label:'Vendu classique N-1',color:'#10b66d',top:false},{v:values[4],label:`Envoi marché ${year}`,color:C.blue,top:false},{v:values[3],label:`Objectif ${year}`,color:'#a040ff',top:true}];
+ const marks=[{v:values[0],label:'Objectif N-1',color:'#3B82F6',top:true},{v:values[2],label:'Max vendu N-1',color:C.orange,top:true},{v:values[1],label:'Vendu classique N-1',color:'#10b66d',top:false},{v:values[4],label:`Envoi marché ${year}`,color:C.blue,top:false},{v:values[3],label:`Objectif ${year}`,color:'#a040ff',top:true}];
  const measuringContext=document.createElement('canvas').getContext('2d');
  const placed=layoutCgrpLabels(marks,pos,(value,size,weight)=>{measuringContext.font=`${weight} ${size}px Arial, sans-serif`;return measuringContext.measureText(value).width;});
  // Ordered leaders fan out towards the labels without moving the actual points.
