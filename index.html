@@ -113,7 +113,8 @@ function render(data){
  text(82,789,`BB : ${percent(bb)}`,18,C.blue,700);text(1010,789,`BA : ${percent(ba)}`,18,'#2eb0c8',700,'text-anchor="end"');rect(82,809,928,24,C.light,8);
  if(splitKnown){const bbWidth=928*bb/(bb+ba);rect(82,809,bbWidth,24,C.blue);rect(82+bbWidth,809,928-bbWidth,24,'#2eb0c8');}
  text(82,865,'BB : billboards · BA : bandes-annonces',14,C.muted);
- const digitalImpressionsPerWeek=Number.isFinite(perPlace)&&Number.isFinite(overflow.impressions)&&overflow.impressions>0&&Number.isFinite(overflow.impressions_par_semaine)?perPlace*overflow.impressions_par_semaine/overflow.impressions:null;
+ const programmeWeeks=info.numero_semaine;
+ const digitalImpressionsPerWeek=Number.isFinite(perPlace)&&perPlace>=0&&Number.isFinite(programmeWeeks)&&programmeWeeks>0?perPlace/programmeWeeks:null;
  const splitValue=(value,share)=>splitKnown&&Number.isFinite(value)?value*share/100:null;
  [['BB',bb,C.blue],['BA',ba,'#2eb0c8']].forEach(([format,share,color],row)=>{
   const y=903+row*76;
