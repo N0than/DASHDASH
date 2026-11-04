@@ -107,12 +107,12 @@ function render(data){
  const capacityRows=[['Inventaire max / place',num(maxPerPlace,0)],['Inventaire total disponible',num(sales.inventaire_total_disponible,0)],['Potentiel / parrain au CPM digital',money(potentialPerSponsor,0)],['Nombre de parrains',num(metrics.nombre_parrains??info.nombre_parrain,0)],['Places totales / TV + Digital',`${num(places.total,0)} / ${num(places.tv_digital,0)}`],['Places 100 % Digital / supplémentaires',`${num(places.digital_100,0)} / ${num(places.supplementaires,0)}`]];
  capacityRows.forEach(([label,value],i)=>{const y=368+i*48;text(1080,y,label,13,C.muted);text(1518,y+21,value,20,C.navy,700,'text-anchor="end"');});
  s+='<g transform="translate(0 -392)">';
- rect(56,680,980,374,'white',18);text(82,719,'DÉPASSEMENT & RÉPARTITION BB / BA',18,C.navy,700);text(82,747,'Dépassement par place · répartition du dépassement',13,C.muted);
- [['IMPRESSIONS',num(overflow.impressions,0)],['BUDGET',money(overflow.budget,0)],['IMPRESSIONS / SEMAINE',num(overflow.impressions_par_semaine,0)]].forEach(([label,value],i)=>{const x=82+i*310;text(x,789,label,12,C.muted,700);text(x,826,value,27,overflow.impressions>0?C.orange:C.navy,700);});
+ rect(56,680,980,374,'white',18);text(82,719,'RÉPARTITION BB / BA',18,C.navy,700);text(82,747,'Dépassement par place · répartition du dépassement',13,C.muted);
+ [['IMPRESSIONS',num(overflow.impressions,0)],['BUDGET',money(overflow.budget,0)],['IMPRESSIONS / SEMAINE',num(overflow.impressions_par_semaine,0)]].forEach(([label,value],i)=>{const x=82+i*310;text(x,916,label,12,C.muted,700);text(x,953,value,27,overflow.impressions>0?C.orange:C.navy,700);});
  const bb=overflow.repartition_bb_pct,ba=overflow.repartition_ba_pct,splitKnown=Number.isFinite(bb)&&bb>=0&&Number.isFinite(ba)&&ba>=0&&bb+ba>0;
- text(82,881,`BB : ${percent(bb)}`,18,C.blue,700);text(1010,881,`BA : ${percent(ba)}`,18,'#2eb0c8',700,'text-anchor="end"');rect(82,901,928,24,C.light,8);
- if(splitKnown){const bbWidth=928*bb/(bb+ba);rect(82,901,bbWidth,24,C.blue);rect(82+bbWidth,901,928-bbWidth,24,'#2eb0c8');}
- text(82,961,'BB : billboards · BA : bandes-annonces',14,C.muted);
+ text(82,789,`BB : ${percent(bb)}`,18,C.blue,700);text(1010,789,`BA : ${percent(ba)}`,18,'#2eb0c8',700,'text-anchor="end"');rect(82,809,928,24,C.light,8);
+ if(splitKnown){const bbWidth=928*bb/(bb+ba);rect(82,809,bbWidth,24,C.blue);rect(82+bbWidth,809,928-bbWidth,24,'#2eb0c8');}
+ text(82,865,'BB : billboards · BA : bandes-annonces',14,C.muted);
  const perDigitalPlaces=places.inventaire_100_digital_par_place;
  const digitalPlaceSummary=Array.isArray(perDigitalPlaces)&&perDigitalPlaces.length?perDigitalPlaces.map((value,i)=>`P${i+1} : ${num(value,0)}`).join(' · '):'—';
  text(82,1003,'Inventaire des places 100 % Digital',13,C.muted);text(82,1034,digitalPlaceSummary,15,C.navy,700, digitalPlaceSummary.length>100?'textLength="928" lengthAdjust="spacingAndGlyphs"':'');
