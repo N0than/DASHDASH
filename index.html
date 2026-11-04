@@ -94,7 +94,7 @@ function render(data){
  const potentialPerSponsor=Number.isFinite(maxPerPlace)&&Number.isFinite(digitalCpm)?maxPerPlace*digitalCpm/1000:null;
  const deviceInventoryGap=pct(perPlace,maxPerPlace);
  const percent=value=>Number.isFinite(value)?num(value,2)+' %':'—';
- begin();rect(0,0,1600,1131,'#f3f6fa');text(56,66,`${name} | Dispositif digital M6+`,29,C.navy,700);
+ begin();rect(0,0,1600,1131,'#f3f6fa');text(56,66,`${name} | DISPOSITIF DIGITAL M6+`.toLocaleUpperCase('fr-FR'),29,C.navy,700);
  if(Number.isFinite(digitalCpm)&&digitalCpm>0){rect(1414,44,130,32,'#dce2eb',16);text(1479,65,`CPM : ${money(digitalCpm)}`,14,C.navy,700,'text-anchor="middle"');}
  text(56,105,`${info.chaine||'—'} / ${year} / Inventaire, commercialisation et extensions digitales`,15,C.muted);
  [['INVENTAIRE MAX PAR PARRAIN',num(maxPerPlace,0)],['IMPRESSIONS / PARRAIN',num(perPlace,0)],['BUDGET DIGITAL / PARRAIN',money(digitalBudget,0)],['Dispositif Vs Inventaire',(deviceInventoryGap>0?'+':'')+percent(deviceInventoryGap)]].forEach(([label,value],i)=>{const x=56+i*377;rect(x,138,357,132,'white',18);text(x+22,175,label,13,C.muted,700);text(x+22,226,value,30,i===3&&deviceInventoryGap>100?C.red:i===3&&deviceInventoryGap>0?C.orange:C.navy,700);});
