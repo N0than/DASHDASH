@@ -97,7 +97,15 @@ function render(data){
  begin();rect(0,0,1600,1131,'#f3f6fa');text(56,66,`${name} | DISPOSITIF DIGITAL M6+`.toLocaleUpperCase('fr-FR'),29,C.navy,700);
  if(Number.isFinite(digitalCpm)&&digitalCpm>0){rect(1414,44,130,32,'#dce2eb',16);text(1479,65,`CPM : ${money(digitalCpm)}`,14,C.navy,700,'text-anchor="middle"');}
  text(56,105,`${info.chaine||'—'} / ${year} / Inventaire, commercialisation et extensions digitales`,15,C.muted);
- [['INVENTAIRE MAX PAR PARRAIN',num(maxPerPlace,0)],['IMPRESSIONS / PARRAIN',num(perPlace,0)],['BUDGET DIGITAL / PARRAIN',money(digitalBudget,0)],['Dispositif Vs Inventaire',Number.isFinite(deviceInventoryGap)&&deviceInventoryGap<0?percent(deviceInventoryGap+100)+' / '+percent(-deviceInventoryGap):(deviceInventoryGap>0?'+':'')+percent(deviceInventoryGap)]].forEach(([label,value],i)=>{const x=56+i*377;rect(x,138,357,132,'white',18);text(x+22,175,label,13,C.muted,700);text(x+22,226,value,30,i===3&&deviceInventoryGap>100?C.red:i===3&&deviceInventoryGap>0?C.orange:C.navy,700);});
+ const inventoryPercent=value=>Number.isFinite(value)?num(value,1)+'%':'—';
+ [['INVENTAIRE MAX PAR PARRAIN',num(maxPerPlace,0)],['IMPRESSIONS / PARRAIN',num(perPlace,0)],['BUDGET DIGITAL / PARRAIN',money(digitalBudget,0)],['Dispositif Vs Inventaire',(deviceInventoryGap>0?'+':'')+inventoryPercent(deviceInventoryGap)]].forEach(([label,value],i)=>{
+  const x=56+i*377;rect(x,138,357,132,'white',18);text(x+22,175,label,13,C.muted,700);
+  if(i===3&&Number.isFinite(deviceInventoryGap)&&deviceInventoryGap<0){
+   const left=x+91,right=x+266;
+   text(left,216,inventoryPercent(deviceInventoryGap+100),28,C.navy,700,'text-anchor="middle"');text(x+178,216,'/',25,C.muted,400,'text-anchor="middle"');text(right,216,inventoryPercent(-deviceInventoryGap),28,C.navy,700,'text-anchor="middle"');
+   rect(left-53,231,106,24,'#dce2eb',12);text(left,247,'préempté',12,C.navy,700,'text-anchor="middle"');rect(right-53,231,106,24,'#d9f3e5',12);text(right,247,'disponible',12,C.green,700,'text-anchor="middle"');
+  }else text(x+22,226,value,30,i===3&&deviceInventoryGap>100?C.red:i===3&&deviceInventoryGap>0?C.orange:C.navy,700);
+ });
  s+='<g transform="translate(0 392)">';
  rect(56,288,980,381,'white',18);text(82,327,'COMMERCIALISATION & POTENTIEL M6+',18,C.navy,700);
  text(82,366,'DISPOSITIF',12,C.muted,700);text(600,366,'IMPRESSIONS',12,C.muted,700,'text-anchor="end"');text(827,366,'BUDGET',12,C.muted,700,'text-anchor="end"');text(1010,366,'PART',12,C.muted,700,'text-anchor="end"');
