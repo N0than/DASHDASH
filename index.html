@@ -103,7 +103,7 @@ function render(data){
   if(i===3&&Number.isFinite(deviceInventoryGap)&&deviceInventoryGap<0){
    const left=x+91,right=x+266;
    text(left,216,inventoryPercent(deviceInventoryGap+100),28,C.navy,700,'text-anchor="middle"');text(x+178,216,'/',25,C.muted,400,'text-anchor="middle"');text(right,216,inventoryPercent(-deviceInventoryGap),28,C.navy,700,'text-anchor="middle"');
-   rect(left-53,231,106,24,'#dce2eb',12);text(left,247,'préempté',12,C.navy,700,'text-anchor="middle"');rect(right-53,231,106,24,'#d9f3e5',12);text(right,247,'disponible',12,C.green,700,'text-anchor="middle"');
+   rect(left-53,231,106,24,'#dce2eb',12);text(left,247,'PRÉEMPTÉ',12,C.navy,700,'text-anchor="middle"');rect(right-53,231,106,24,'#d9f3e5',12);text(right,247,'DISPONIBLE',12,C.green,700,'text-anchor="middle"');
   }else text(x+22,226,value,30,i===3&&deviceInventoryGap>100?C.red:i===3&&deviceInventoryGap>0?C.orange:C.navy,700);
  });
  s+='<g transform="translate(0 392)">';
