@@ -98,13 +98,16 @@ function render(data){
  if(Number.isFinite(digitalCpm)&&digitalCpm>0){rect(1414,44,130,32,'#dce2eb',16);text(1479,65,`CPM : ${money(digitalCpm)}`,14,C.navy,700,'text-anchor="middle"');}
  text(56,105,`${info.chaine||'—'} / ${year} / Inventaire, commercialisation et extensions digitales`,15,C.muted);
  [['INVENTAIRE MAX PAR PARRAIN',num(maxPerPlace,0)],['IMPRESSIONS / PARRAIN',num(perPlace,0)],['BUDGET DIGITAL / PARRAIN',money(digitalBudget,0)],['Dispositif Vs Inventaire',(deviceInventoryGap>0?'+':'')+percent(deviceInventoryGap)]].forEach(([label,value],i)=>{const x=56+i*377;rect(x,138,357,132,'white',18);text(x+22,175,label,13,C.muted,700);text(x+22,226,value,30,i===3&&deviceInventoryGap>100?C.red:i===3&&deviceInventoryGap>0?C.orange:C.navy,700);});
- rect(56,288,980,374,'white',18);text(82,327,'COMMERCIALISATION & POTENTIEL M6+',18,C.navy,700);
+ s+='<g transform="translate(0 392)">';
+ rect(56,288,980,381,'white',18);text(82,327,'COMMERCIALISATION & POTENTIEL M6+',18,C.navy,700);
  text(82,366,'DISPOSITIF',12,C.muted,700);text(600,366,'IMPRESSIONS',12,C.muted,700,'text-anchor="end"');text(827,366,'BUDGET',12,C.muted,700,'text-anchor="end"');text(1010,366,'PART',12,C.muted,700,'text-anchor="end"');
  [['TV + Digital',sales.tv_digital],['100 % Digital',sales.digital_100],['Places supplémentaires',sales.places_supplementaires],['Non commercialisé',sales.non_commercialise],['Total commercialisable',sales.total_commercialisable],['Potentiel max M6+',sales.potentiel_max]].forEach(([label,value],i)=>{const row=value||{},y=405+i*43;const weight=i>=4?700:400;line(82,y-23,1010,y-23);text(82,y,label,15,C.navy,weight);text(600,y,num(row.impressions,0),16,C.navy,weight,'text-anchor="end"');text(827,y,money(row.budget,0),16,C.navy,weight,'text-anchor="end"');text(1010,y,percent(row.pourcentage),14,C.muted,400,'text-anchor="end"');});
+ s+='</g>';
  rect(1054,288,490,374,'white',18);text(1080,327,'INVENTAIRE & PLACES',18,C.navy,700);
  const capacityRows=[['Inventaire max / place',num(maxPerPlace,0)],['Inventaire total disponible',num(sales.inventaire_total_disponible,0)],['Potentiel / parrain au CPM digital',money(potentialPerSponsor,0)],['Nombre de parrains',num(metrics.nombre_parrains??info.nombre_parrain,0)],['Places totales / TV + Digital',`${num(places.total,0)} / ${num(places.tv_digital,0)}`],['Places 100 % Digital / supplémentaires',`${num(places.digital_100,0)} / ${num(places.supplementaires,0)}`]];
  capacityRows.forEach(([label,value],i)=>{const y=368+i*48;text(1080,y,label,13,C.muted);text(1518,y+21,value,20,C.navy,700,'text-anchor="end"');});
- rect(56,680,980,381,'white',18);text(82,719,'DÉPASSEMENT & RÉPARTITION BB / BA',18,C.navy,700);text(82,747,'Dépassement par place · répartition du dépassement',13,C.muted);
+ s+='<g transform="translate(0 -392)">';
+ rect(56,680,980,374,'white',18);text(82,719,'DÉPASSEMENT & RÉPARTITION BB / BA',18,C.navy,700);text(82,747,'Dépassement par place · répartition du dépassement',13,C.muted);
  [['IMPRESSIONS',num(overflow.impressions,0)],['BUDGET',money(overflow.budget,0)],['IMPRESSIONS / SEMAINE',num(overflow.impressions_par_semaine,0)]].forEach(([label,value],i)=>{const x=82+i*310;text(x,789,label,12,C.muted,700);text(x,826,value,27,overflow.impressions>0?C.orange:C.navy,700);});
  const bb=overflow.repartition_bb_pct,ba=overflow.repartition_ba_pct,splitKnown=Number.isFinite(bb)&&bb>=0&&Number.isFinite(ba)&&ba>=0&&bb+ba>0;
  text(82,881,`BB : ${percent(bb)}`,18,C.blue,700);text(1010,881,`BA : ${percent(ba)}`,18,'#2eb0c8',700,'text-anchor="end"');rect(82,901,928,24,C.light,8);
@@ -113,6 +116,7 @@ function render(data){
  const perDigitalPlaces=places.inventaire_100_digital_par_place;
  const digitalPlaceSummary=Array.isArray(perDigitalPlaces)&&perDigitalPlaces.length?perDigitalPlaces.map((value,i)=>`P${i+1} : ${num(value,0)}`).join(' · '):'—';
  text(82,1003,'Inventaire des places 100 % Digital',13,C.muted);text(82,1034,digitalPlaceSummary,15,C.navy,700, digitalPlaceSummary.length>100?'textLength="928" lengthAdjust="spacingAndGlyphs"':'');
+ s+='</g>';
  rect(1054,680,490,381,'white',18);text(1080,719,'FRAME',18,C.navy,700);text(1080,756,'BUDGET FRAME',13,C.muted,700);text(1080,804,money(frame.budget,0),38,C.navy,700);line(1080,834,1518,834);
  text(1080,875,'Inventaire Frame',14,C.muted);text(1080,915,num(frame.inventaire??digital.inventaire_frame,0),30,C.navy,700);text(1080,965,'CPM Frame',14,C.muted);text(1080,1005,money(frame.cpm??digital.cpm_frame),27,C.navy,700);
  text(56,1098,`Source : export JSON du ${dateLabel} | Potentiel / parrain = inventaire max / place × CPM digital / 1 000.`,12,C.muted);
