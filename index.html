@@ -105,7 +105,7 @@ function render(data){
  s+='</g>';
  rect(1054,288,490,374,'white',18);text(1080,327,'INVENTAIRE & PLACES',18,C.navy,700);
  const capacityRows=[['Place TV / DIGITAL',num(places.tv_digital,0)],['Place 100% Digital',num(places.digital_100,0)],['Place additionnelle disponible',num(places.supplementaires,0)],['Inventaire disponible non packagé',num(sales.non_commercialise?.impressions,0)]];
- capacityRows.forEach(([label,value],i)=>{const y=376+i*75;text(1080,y,label,14,C.muted);text(1518,y+29,value,24,C.navy,700,'text-anchor="end"');});
+ capacityRows.forEach(([label,value],i)=>{const y=376+i*75;rect(1080,y-22,438,66,C.light,12);text(1096,y,label,14,C.muted);text(1502,y+29,value,24,C.navy,700,'text-anchor="end"');});
  s+='<g transform="translate(0 -392)">';
  rect(56,680,980,374,'white',18);text(82,719,'RÉPARTITION BB / BA',18,C.navy,700);text(82,747,'Intégralité des impressions digitales par parrain',13,C.muted);
 
